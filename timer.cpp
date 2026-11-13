@@ -43,6 +43,18 @@ void write_siren(std::FILE* f, double seconds) {
 }
 
 int main(int argc, char** argv) {
+    if (argc > 1 && (std::string(argv[1]) == "--help" ||
+                     std::string(argv[1]) == "-h")) {
+        std::printf("usage: %s <time>\n\n"
+                    "time: bare number = minutes, or combine h/m/s\n\n"
+                    "examples:\n"
+                    "  %s 5        # 5 minutes\n"
+                    "  %s 90s      # 90 seconds\n"
+                    "  %s 1h30m    # 1 hour 30 minutes\n",
+                    argv[0], argv[0], argv[0], argv[0]);
+        return 0;
+    }
+
     double total;
     if (argc > 1) {
         total = parse_duration(argv[1]);
